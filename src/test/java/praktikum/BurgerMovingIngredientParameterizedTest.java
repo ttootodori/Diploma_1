@@ -9,13 +9,13 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(Parameterized.class)
-public class BurgerMovingIngredientTest {
+public class BurgerMovingIngredientParameterizedTest {
 
     private Burger burger;
     private final int index;
     private final int newIndex;
 
-    public BurgerMovingIngredientTest(int index, int newIndex) {
+    public BurgerMovingIngredientParameterizedTest(int index, int newIndex) {
         this.index = index;
         this.newIndex = newIndex;
     }
