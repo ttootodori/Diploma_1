@@ -2,7 +2,10 @@
 *.class
 
 # Build folders
-target/
+target/*
+!target/site/
+target/site/*
+!target/site/jacoco/
 build/
 out/
 
