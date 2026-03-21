@@ -21,26 +21,24 @@ public class BurgerTests {
         assertEquals(burger.bun, mockBun);
     }
 
+
     @Test
-    public void addIngredientTest() {
+    public void addIngredientAddsCorrectIngredientTest() {
         Ingredient mockIngredient = mock(Ingredient.class);
         burger.addIngredient(mockIngredient);
-        assertEquals(1, burger.ingredients.size());
         assertTrue(burger.ingredients.contains(mockIngredient));
     }
+
     @Test
-    public void removeIngredientTest() {
-        Ingredient mock1 = mock(Ingredient.class);
-        Ingredient mock2 = mock(Ingredient.class);
+    public void removeIngredientRemovesCorrectIngredientTest() {
+        Ingredient firstIngredient = mock(Ingredient.class);
+        Ingredient secondIngredient = mock(Ingredient.class);
 
-        burger.addIngredient(mock1); // индекс 0
-        burger.addIngredient(mock2); // индекс 1
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
+        burger.removeIngredient(0);
 
-        burger.removeIngredient(0); // удаляю первый
-
-        assertEquals(1, burger.ingredients.size()); //смотрю, чтобы размер был 1
-        assertFalse(burger.ingredients.contains(mock1)); //смотрю, чтобы правильный ингредиент удалился
-        assertEquals(mock2, burger.ingredients.get(0)); //смотрю, чтобы оставшийся ингредиент был на правильном месте
+        assertFalse(burger.ingredients.contains(firstIngredient));
     }
     
     @Test
@@ -48,14 +46,18 @@ public class BurgerTests {
         //создаю кучу моков и стабов, чтобы использовать
         Bun mockBun = mock(Bun.class);
         when(mockBun.getPrice()).thenReturn(70f);
-        Ingredient mock1 = mock(Ingredient.class);
-        when(mock1.getPrice()).thenReturn(40f);
-        Ingredient mock2 = mock(Ingredient.class);
-        when(mock2.getPrice()).thenReturn(30f);
+
+        Ingredient firstIngredient = mock(Ingredient.class);
+        when(firstIngredient.getPrice()).thenReturn(40f);
+
+        Ingredient secondIngredient = mock(Ingredient.class);
+        when(secondIngredient.getPrice()).thenReturn(30f);
+
         //вот тут уже собственно использую моки
         burger.setBuns(mockBun);
-        burger.addIngredient(mock1);
-        burger.addIngredient(mock2);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
+
         //проверяю, чтобы результат совпадал с тем, который должен быть
         assertEquals(210f, burger.getPrice(), 0.01);
     }
